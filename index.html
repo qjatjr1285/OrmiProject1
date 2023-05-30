@@ -1,1 +1,149 @@
-인덱스
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>chat</title>
+        <style>
+            .logo {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            textarea {
+                resize: none;
+            }
+            
+            .main {
+                display: flex;
+                gap: 15px;
+                
+            }
+            .down {
+                display: flex;
+                justify-content: center;
+                align-content: center;
+            }
+        </style>
+    </head>
+    <body>
+    <div class="container">
+        <div class="logo">
+            <h1>logo</h1>
+            <h3>시간 복잡도 계산 사이트</h3>
+        </div>
+            <form action="post">
+                <div class="main">
+                    <div class="left">
+                        <textarea id="text" cols="50" rows="20" autofocus></textarea>
+                    </div>
+                    <div class="right">
+                            
+                            <!-- <input type="text" autofocus /> -->
+                            <button type="submit">전송</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        <ul></ul>
+    </div>
+    <script>
+        const $form = document.querySelector("form");
+        const $input = document.querySelector("textarea");
+        const $chatList = document.querySelector("p");
+
+        // openAI API
+        let url = `https://estsoft-openai-api.jejucodingcamp.workers.dev/`;
+
+        // 사용자의 질문
+        let question;
+
+        // 질문과 답변 저장
+        let data = [
+        {
+                role: "system",
+                content: "이 코드의 시간복잡도를 계산해줘. 표시는 주어진 코드의 시간 복잡도는 x입니다. 라고 표시해줘",
+        },
+        ];
+
+        // 화면에 뿌려줄 데이터, 질문들
+        let questionData = [];
+
+        // input에 입력된 질문 받아오는 함수
+        $input.addEventListener("textarea", (e) => {
+            question = e.target.value;
+        });
+
+        // 사용자의 질문을 객체를 만들어서 push
+        const sendQuestion = (question) => {
+        if (question) {
+                data.push({
+                role: "user",
+                content: question,
+                });
+                questionData.push({
+                role: "user",
+                content: question,
+                });
+        }
+        };
+
+        // 화면에 질문 그려주는 함수
+        const printQuestion = async () => {
+        if (question) {
+                let li = document.createElement("textarea");
+                li.classList.add("question");
+                questionData.map((el) => {
+                li.innerText = el.content;
+                });
+                $chatList.appendChild(li);
+                questionData = [];
+                question = false;
+        }
+        };
+
+        // 화면에 답변 그려주는 함수
+        const printAnswer = (answer) => {
+        let li = document.createElement("p");
+        li.classList.add("answer");
+        li.innerText = answer;
+        $chatList.appendChild(li);
+        };
+
+        // api 요청보내는 함수
+        const apiPost = async () => {
+        const result = await fetch(url, {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+                redirect: "follow",
+        })
+                .then((res) => res.json())
+                .then((res) => {
+                printAnswer(res.choices[0].message.content);
+                })
+                .catch((err) => {
+                console.log(err);
+                });
+        };
+
+        // submit
+        $form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        $input.value = null;
+        sendQuestion(question);
+        apiPost();
+        printQuestion();
+        });
+    </script>
+    </body>
+</html>
