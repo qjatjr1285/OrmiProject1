@@ -7,12 +7,13 @@
         <title>chat</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="./js/tailwind.config.js"></script> 
+        
         <style>
             form {
                 width: 100%;
                 margin-top: 5%;
-                margin-left: 20%;
-                margin-right: 20%;
+                padding-left: 20%;
+                padding-right: 20%;
             }
 
             .container {
@@ -26,6 +27,7 @@
                 justify-content: space-evenly;
             }
             
+            
             .cont {
                 display: flex;
                 flex-direction: column;
@@ -33,13 +35,32 @@
             }
 
             input {
-                width: 70%;
+                width: 100%;
                 height: 50px;
             }
             button {
-                width: 70%;
-                height: 15%;
+                width: 100%;
+                height: 40px;
                 
+            }
+
+            /* 화면 크기가 줄어들 때 */
+            @media(max-width:1100px) {
+                .main {
+                    display: flex;
+                    justify-content: space-evenly;
+                    flex-direction: column;
+                }
+
+                input {
+                    width: 100%;
+                    
+                }
+
+                button {
+                    width: 100%;
+                    height: 40px;
+                }
             }
         </style>
 </head>
@@ -50,14 +71,14 @@
             <!-- <input type="text" autofocus />
             <button type="submit">전송</button> -->
             <div class="header">
-                <div class="logo mb-7">
-                    <h1 class="text-2xl text-[#2E6FF2] font-bold">LOGO</h1>
+                <div class="logo mb-7 border-b border-slate-300 pb-5">
+                    <h1 class="text-2xl text-[#2E6FF2] font-bold">ShoeBOX</h1>
                 </div>
             </div>
-            <div class="container">
-                <div class="main flex flex-wrap gap-5">
+            <div class="container mb-20">
+                <div class="main flex flex-wrap gap-7">
                     <div class="img flex-1">
-                        <img class="rounded-lg" src="./img/shoes.webp" alt="">
+                        <img class="rounded-lg border border-slate-200" src="./img/shoes.webp" alt="">
                     </div>
                     <div class="cont flex-1">
                         <div class="seloption mb-3">
@@ -65,27 +86,44 @@
                         </div>
 
                         <div class="colors mb-3">
-                            <p class="text-sm mb-3">색상을 선택하세요.</p>
+                            <p class="text-sm mb-3">색상 계열을 선택하세요.</p>
                             <!-- <input class="w-8 h-8 bg-slate-200 border border-slate-300" type="color" id="color" value="#0e0e0e"> -->
-                            <select class="w-24" id="selectBox" onchange="selectBoxValue(this)">
+                            <select class="w-24" id="selectBox">
+                            <!-- <select class="w-24" id="selectBox" onchange="showValue(this)"> -->
                                 <option class="w-8 h-8 bg-[#0e0e0e] text-[#0e0e0e] border border-slate-300" value="검은색">검은색</option>
+                                <option class="w-8 h-8 bg-slate-400 text-slate-400 border border-slate-300" value="회색">회색</option>
                                 <option class="w-8 h-8 bg-white text-white border border-slate-300" value="흰색">흰색</option>
                                 <option class="w-8 h-8 bg-pink-400 text-pink-400 border border-slate-300" value="분홍색">분홍색</option>
                                 <option class="w-8 h-8 bg-red-500 text-red-500 border border-slate-300" value="빨강색">빨강색</option>
                                 <option class="w-8 h-8 bg-yellow-300 text-yellow-300 border border-slate-300" value="노랑색">노랑색</option>
                                 <option class="w-8 h-8 bg-orange-400 text-orange-400 border border-slate-300" value="주황색">주황색</option>
-                                <option class="w-8 h-8 bg-orange-600 text-orange-600 border border-slate-300" value="갈색">갈색</option>
-                                <!-- <option class="w-8 h-8 bg-slate-200 text- border border-slate-300" value=""></option>
-                                <option class="w-8 h-8 bg-slate-200 text- border border-slate-300" value=""></option>
-                                <option class="w-8 h-8 bg-slate-200 text- border border-slate-300" value=""></option>
-                                <option class="w-8 h-8 bg-slate-200 text- border border-slate-300" value=""></option> -->
+                                <option class="w-8 h-8 bg-amber-600 text-amber-600 border border-slate-300" value="갈색">갈색</option>
+                                <option class="w-8 h-8 bg-lime-400 text-lime-400 border border-slate-300" value="연두색">연두색</option>
+                                <option class="w-8 h-8 bg-green-500 text-green-500 border border-slate-300" value="초록색">초록색</option>
+                                <option class="w-8 h-8 bg-cyan-400 text-cyan-400 border border-slate-300" value="하늘색">하늘색</option>
+                                <option class="w-8 h-8 bg-blue-700 text-blue-700 border border-slate-300" value="남색">남색</option>
+                                <option class="w-8 h-8 bg-purple-600 text-purple-600 border border-slate-300" value="보라색">보라색</option>
                             </select>
-                            
                         </div>
                         
+                        <div class="items mb-3">
+                            <p class="text-sm mb-3">신발의 종류를 선택하세요.</p>
+                            <select class="w-24" id="selectBox">
+                            <!-- <select class="w-24" id="selectBox" onchange="showValue(this)"> -->
+                                <option class="w-8 h-8 bg-[#0e0e0e] text-[#0e0e0e] border border-slate-300" value="검은색">검은색</option>
+                                <option class="w-8 h-8 bg-slate-400 text-slate-400 border border-slate-300" value="회색">회색</option>
+                                <option class="w-8 h-8 bg-white text-white border border-slate-300" value="흰색">흰색</option>
+                                <option class="w-8 h-8 bg-pink-400 text-pink-400 border border-slate-300" value="분홍색">분홍색</option>
+                                <option class="w-8 h-8 bg-red-500 text-red-500 border border-slate-300" value="빨강색">빨강색</option>
+                                <option class="w-8 h-8 bg-yellow-300 text-yellow-300 border border-slate-300" value="노랑색">노랑색</option>
+                                <option class="w-8 h-8 bg-orange-400 text-orange-400 border border-slate-300" value="주황색">주황색</option>
+                                <option class="w-8 h-8 bg-amber-600 text-amber-600 border border-slate-300" value="갈색">갈색</option>
+                            </select>
+                        </div>
+
                         <div class="price mb-3">
-                            <p class="text-sm">가격을 입력하세요.</p>
-                            <input class="form-control" type="text" id="price" placeholder="숫자만 입력하시오." pattern="[0-9]+">
+                            <p class="text-sm mb-3">가격을 입력하세요.</p>
+                            <input class="border border-slate-300 rounded-md" type="text" id="price" placeholder="숫자만 입력하시오. 기본 설정 가격은 10만원입니다." pattern="[0-9]+" >
                         </div>
                         <button class="bg-[#2E6FF2] font-bold text-white rounded-md" type="submit">전송</button>
                     </div>
@@ -98,24 +136,19 @@
         </form>
     </div>
     <script>
-        // function changeColor() {
-        //     clsName = document.getElementById("selectBox").className
-        //     Element.clsName = ' bg-' + document.querySelector("option").value
-        //     console.log(Element.clsName)
-        // }
-    </script>
-    <script>
         // openAI API   
         let url = `https://estsoft-openai-api.jejucodingcamp.workers.dev/`;
 
         // select option의 value, text값 가져오기
-        const selectBoxValue = (target) => {
-            const Color = target.value;
-            const text =  target.options[target.selectedIndex].text;
-        }
+        // const showValue = (target) => {
+        //     const value = target.value;
+        //     const text =  target.options[target.selectedIndex].text;
+
+        // }
         
         let $inputPrice = document.querySelector('#price')
         let $button = document.querySelector('button')
+        let $value = document.querySelector('#selectBox')
         
         let data = [{
             "role": "system",
@@ -124,9 +157,17 @@
         
         $button.addEventListener('click', e =>{
             e.preventDefault()
-            userInputData = '색상은 ' + selectBoxValue.value +'색이고, 가격은 ' + $inputPrice.value + '원 내외로 신발 추천해줘.'
+            if ($inputPrice.value == '') {
+                userInputData = '가격이 10만원 내외인 ' + $value.value +'계열의 신발을 추천해줘.'
+            }
+            else {
+                userInputData = '가격이 ' + $inputPrice.value + '원 내외인 ' + $value.value + '계열의 신발을 추천해줘.'
+            }
             $inputPrice.value = ''
 
+            console.log($inputPrice.value)
+            console.log(userInputData)
+            
             data.push({
                 "role": "user",
                 "content": userInputData
