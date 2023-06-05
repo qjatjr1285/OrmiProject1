@@ -44,6 +44,8 @@
                 
             }
 
+
+            /* 여기부터 result css */
             .result_price {
                 font-size: large;
             }
@@ -240,6 +242,7 @@
             .then(res => res.json())
             .then(res => {
                 // console.log(res)
+                // result -> 결과로 받은 json
                 result = JSON.parse(res.choices[0].message.content)
                 console.log(JSON.parse(res.choices[0].message.content))
                 console.log(result.price)
