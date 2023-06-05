@@ -44,6 +44,9 @@
                 
             }
 
+            .result_price {
+                font-size: large;
+            }
 
             /* 화면 크기가 줄어들 때 */
             @media(max-width:1100px) {
@@ -91,23 +94,23 @@
                             <!-- <input class="w-8 h-8 bg-slate-200 border border-slate-300" type="color" id="color" value="#0e0e0e"> -->
                             <select class="w-1/2" id="selectColor">
                             <!-- <select class="w-24" id="selectBox" onchange="showValue(this)"> -->
-                                <option class="w-8 h-8 bg-[#0e0e0e] text-[#0e0e0e] border border-slate-300" value="검은색">검은색</option>
-                                <option class="w-8 h-8 bg-slate-400 text-slate-400 border border-slate-300" value="회색">회색</option>
-                                <option class="w-8 h-8 bg-white text-white border border-slate-300" value="흰색">흰색</option>
+                                <option class="w-8 h-8 bg-[#0e0e0e] text-[#0e0e0e] border border-slate-300" value="black">black</option>
+                                <option class="w-8 h-8 bg-slate-400 text-slate-400 border border-slate-300" value="gray">gray</option>
+                                <option class="w-8 h-8 bg-white text-white border border-slate-300" value="white">white</option>
                                 <!-- <option class="w-8 h-8 bg-pink-400 text-pink-400 border border-slate-300" value="분홍색">분홍색</option> -->
-                                <option class="w-8 h-8 bg-red-500 text-red-500 border border-slate-300" value="빨강색">빨강색</option>
-                                <option class="w-8 h-8 bg-yellow-300 text-yellow-300 border border-slate-300" value="노랑색">노랑색</option>
+                                <option class="w-8 h-8 bg-red-500 text-red-500 border border-slate-300" value="red">red</option>
+                                <option class="w-8 h-8 bg-yellow-300 text-yellow-300 border border-slate-300" value="yellow">yellow</option>
                                 <!-- <option class="w-8 h-8 bg-orange-400 text-orange-400 border border-slate-300" value="주황색">주황색</option> -->
-                                <option class="w-8 h-8 bg-amber-600 text-amber-600 border border-slate-300" value="갈색">갈색</option>
+                                <option class="w-8 h-8 bg-amber-600 text-amber-600 border border-slate-300" value="brown">brown</option>
                                 <!-- <option class="w-8 h-8 bg-lime-400 text-lime-400 border border-slate-300" value="연두색">연두색</option> -->
-                                <option class="w-8 h-8 bg-green-600 text-green-600 border border-slate-300" value="초록색">초록색</option>
-                                <option class="w-8 h-8 bg-cyan-400 text-cyan-400 border border-slate-300" value="하늘색">하늘색</option>
-                                <option class="w-8 h-8 bg-blue-700 text-blue-700 border border-slate-300" value="남색">남색</option>
+                                <option class="w-8 h-8 bg-green-600 text-green-600 border border-slate-300" value="green">green</option>
+                                <option class="w-8 h-8 bg-cyan-400 text-cyan-400 border border-slate-300" value="skyblue">skyblue</option>
+                                <option class="w-8 h-8 bg-blue-700 text-blue-700 border border-slate-300" value="indigo">indigo</option>
                                 <!-- <option class="w-8 h-8 bg-purple-600 text-purple-600 border border-slate-300" value="보라색">보라색</option> -->
                             </select>
                         </div>
                         
-                        <div class="items mb-3">
+                        <!-- <div class="items mb-3">
                             <p class="text-sm mb-3">신발의 종류를 선택하세요.</p>
                             <select class="w-1/2" id="selectItem">
                                 <option class="w-8 h-8 text-black border border-slate-300" value="스니커즈">스니커즈</option>
@@ -117,7 +120,7 @@
                                 <option class="w-8 h-8 text-black border border-slate-300" value="로퍼">로퍼</option>
                                 <option class="w-8 h-8 text-black border border-slate-300" value="캔버스">캔버스</option>
                             </select>
-                        </div>
+                        </div> -->
 
                         <div class="price mb-3">
                             <p class="text-sm mb-3">가격을 입력하세요.</p>
@@ -134,11 +137,13 @@
         </form>
     </div>
     <script>
+        str = ''
         // 추가 할 것
         // 1. 신발 종류
         // 2. 전송 눌렀을 때 결과 이미지 포함해서 보여주기 3~5개정도
         // 3. 코드 정리 (script, css, main html 파일 나누기)
-        // openAI API   
+        // openAI API  
+
         let url = `https://estsoft-openai-api.jejucodingcamp.workers.dev/`;
 
         // select option의 value, text값 가져오기
@@ -153,20 +158,44 @@
         let $color = document.querySelector('#selectColor')
         let $item = document.querySelector('#selectItem')
         
-        let data = [{
-            "role": "system",
-            "content": "assistant는 신발 추천 전문가이다.",
-        }]
+        
+        let data = [
+            {"role": "system", "content": "assistant는 신발 추천 전문가이다."},
+            {"role": "user", "content": "결과는 문장을 제외하고 json으로만 해줘. 전체 요소는 price, color, product로 하고 price는 입력받은 가격, color는 입력받은 색상, product는 제품의 정보이고, product의 요소는 brand_name, product_name, all으로 나눠줘. product의 요소 중 all은 전체 이름을 표시해줘. 결과는 문장을 제외하고 json으로만 해줘. "},
+            // {"role": "user", "content": "결과는 문장을 제외하고 json으로만 해줘."},
+            // {"role": "user", "content": "전체 요소는 price, color, product로 하고 price는 입력받은 가격, color는 입력받은 색상, product는 제품의 정보야."},
+            // {"role": "user", "content": "product의 요소는 brand_name, product_name, all으로 나눠줘."},
+            // {"role": "user", "content": "product의 요소 중 all은 전체 이름을 표시해줘."},
+        ]
         
         // 가격 빈칸 판별
+        // function checkPrice(){
+        //     if ($inputPrice.value == '') {
+        //         userInputData = '가격이 10만원 내외인 ' + $color.value + '계열의 ' + $item.value + '신발을 추천해줘.'
+        //     }
+        //     else {
+        //         userInputData = '가격이 ' + $inputPrice.value + '원 내외인 ' + $color.value + '계열의 ' + $item.value + '신발을 추천해줘.'
+        //     }
+        // }
+        // ==========================================
+        // function checkPrice(){
+        //     if ($inputPrice.value == '') {
+        //         userInputData = '가격이 10만원 내외인 ' + $color.value + '계열의 신발을 추천해줘.'
+        //     }
+        //     else {
+        //         userInputData = '가격이 ' + $inputPrice.value + '원 내외인 ' + $color.value + '계열의 신발을 추천해줘.'
+        //     }
+        // }
+        // ==========================================
         function checkPrice(){
             if ($inputPrice.value == '') {
-                userInputData = '가격이 10만원 내외인 ' + $color.value + '계열의 ' + $item.value + '신발을 추천해줘.'
+                userInputData = '가격이 10만원 내외인 '
             }
             else {
-                userInputData = '가격이 ' + $inputPrice.value + '원 내외인 ' + $color.value + '계열의 ' + $item.value + '신발을 추천해줘.'
+                userInputData = '가격이 ' + $inputPrice.value + '원 내외인 '
             }
         }
+
 
         $button.addEventListener('click', e =>{
             e.preventDefault()
@@ -174,14 +203,25 @@
             $inputPrice.value = ''
 
             console.log($inputPrice.value)
-            console.log(userInputData)
+            console.log(userInputData + $inputPrice.value)
+            console.log($color.value)
             
-            data.push({
-                // "role": "assistant",
-                // "content": "검은색 스니커즈는 Nike Air Force 1 `07 Low White, New Balance 530 White, Salomon XT-6 ADV White 가 있습니다.",
-                "role": "user",
-                "content": userInputData
-            })
+            if ($color.value == 'white') {
+                data.push({
+                    "role" : "assistant",
+                    "content" : userInputData + $color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
+                })
+            }
+
+
+            // data.push({
+                
+            //     // "role": "assistant",
+            //     // "content": "검은색 스니커즈는 Nike Air Force 1 `07 Low White, New Balance 530 White, Salomon XT-6 ADV White 가 있습니다.",
+                
+            //     "role": "user",
+            //     "content": userInputData
+            // })
 
             chatGptAPI()
         })
@@ -200,8 +240,18 @@
             .then(res => res.json())
             .then(res => {
                 // console.log(res)
-                // console.log(res.choices[0].message.content)
-                document.querySelector('#answerContent').innerText = res.choices[0].message.content
+                result = JSON.parse(res.choices[0].message.content)
+                console.log(JSON.parse(res.choices[0].message.content))
+                console.log(result.price)
+                
+                const divAnswerContent = document.querySelector('#answerContent')
+                str += `
+                    <p class="result_price">${result.price}</p>
+                    <p>${result.color}</p>
+                `
+                divAnswerContent.innerHTML = str;
+
+                //document.querySelector('#answerContent').innerText = res.choices[0].message.content
             })
             
         }
