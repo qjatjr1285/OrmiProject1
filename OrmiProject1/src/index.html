@@ -145,9 +145,13 @@
         // 2. 전송 눌렀을 때 결과 이미지 포함해서 보여주기 3~5개정도
         // 3. 코드 정리 (script, css, main html 파일 나누기)
         // openAI API  
-
+        const $inputPrice = document.querySelector('#price')
+        const $button = document.querySelector('button')
+        const $color = document.querySelector('#selectColor')
+        const $item = document.querySelector('#selectItem')
+        
         let url = `https://estsoft-openai-api.jejucodingcamp.workers.dev/`;
-
+        
         // select option의 value, text값 가져오기
         // const showValue = (target) => {
         //     const value = target.value;
@@ -155,10 +159,6 @@
 
         // }
         
-        let $inputPrice = document.querySelector('#price')
-        let $button = document.querySelector('button')
-        let $color = document.querySelector('#selectColor')
-        let $item = document.querySelector('#selectItem')
         
         
         let data = [
