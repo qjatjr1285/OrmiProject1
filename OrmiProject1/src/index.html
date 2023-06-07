@@ -76,11 +76,15 @@
         <form action="post">
             <!-- <input type="text" autofocus />
             <button type="submit">전송</button> -->
+            <!-- header -->
             <div class="header">
                 <div class="logo mb-7 border-b border-slate-300 pb-5">
                     <h1 class="text-2xl text-[#2E6FF2] font-bold">ShoeBOX</h1>
                 </div>
             </div>
+            <!-- //header -->
+            
+            <!-- main -->
             <div class="container mb-20">
                 <div class="main flex flex-wrap gap-7">
                     <div class="img flex-1">
@@ -94,7 +98,7 @@
                         <div class="colors mb-3">
                             <p class="text-sm mb-3">색상 계열을 선택하세요.</p>
                             <!-- <input class="w-8 h-8 bg-slate-200 border border-slate-300" type="color" id="color" value="#0e0e0e"> -->
-                            <select class="w-1/2" id="selectColor">
+                            <select class="w-full" id="select_color">
                             <!-- <select class="w-24" id="selectBox" onchange="showValue(this)"> -->
                                 <option class="w-8 h-8 bg-[#0e0e0e] text-[#0e0e0e] border border-slate-300" value="black">black</option>
                                 <option class="w-8 h-8 bg-slate-400 text-slate-400 border border-slate-300" value="gray">gray</option>
@@ -114,7 +118,7 @@
                         
                         <!-- <div class="items mb-3">
                             <p class="text-sm mb-3">신발의 종류를 선택하세요.</p>
-                            <select class="w-1/2" id="selectItem">
+                            <select class="w-1/2" id="select_item">
                                 <option class="w-8 h-8 text-black border border-slate-300" value="스니커즈">스니커즈</option>
                                 <option class="w-8 h-8 text-black border border-slate-300" value="운동화">운동화</option>
                                 <option class="w-8 h-8 text-black border border-slate-300" value="구두">구두</option>
@@ -126,16 +130,24 @@
 
                         <div class="price mb-3">
                             <p class="text-sm mb-3">가격을 입력하세요.</p>
-                            <input class="border border-slate-300 rounded-md" type="text" id="price" placeholder="숫자만 입력하시오. 기본 설정 가격은 10만원입니다." pattern="[0-9]+" >
+                            <select class="w-full" id="select_price">
+                                <option class="w-8 h-8 text-black border border-slate-300" value="~10">10만원 미만</option>
+                                <option class="w-8 h-8 text-black border border-slate-300" value="10~30">10만원~30만원</option>
+                                <option class="w-8 h-8 text-black border border-slate-300" value="30~50">30만원~50만원</option>
+                                <option class="w-8 h-8 text-black border border-slate-300" value="50~100">50만원~100만원</option>
+                                <option class="w-8 h-8 text-black border border-slate-300" value="100~">100만원 이상</option>
+                            </select>
+                            <!-- <input class="border border-slate-300 rounded-md" type="text" id="price" placeholder="숫자만 입력하시오. 기본 설정 가격은 10~20만원입니다." pattern="[0-9]+" > -->
                         </div>
                         <button class="bg-[#2E6FF2] font-bold text-white rounded-md" type="submit">전송</button>
                     </div>
                 </div>
                 <div class="answer">
                     <p class="text-xl font-bold">추천 결과</p>
-                    <div id="answerContent"></div>
+                    <div id="answer_content"></div>
                 </div>
             </div>
+            <!-- //main -->
         </form>
     </div>
     <script>
@@ -147,8 +159,12 @@
         // openAI API  
         const $inputPrice = document.querySelector('#price')
         const $button = document.querySelector('button')
-        const $color = document.querySelector('#selectColor')
-        const $item = document.querySelector('#selectItem')
+        const $select_color = document.querySelector('#select_color')
+        const $select_price = document.querySelector('#select_price')
+        const $sel_price_text = $select_price.options[$select_price.selectedIndex].text
+        
+        let color_list = ['black', 'gray', 'white', 'red', 'yellow', 'brown', 'green', 'skyblue', 'indigo']
+        let price_list = ['~10', '10~30', '30~50', '50~100', '100~']
         
         let url = `https://estsoft-openai-api.jejucodingcamp.workers.dev/`;
         
@@ -159,8 +175,6 @@
 
         // }
         
-        
-        
         let data = [
             {"role": "system", "content": "assistant는 신발 추천 전문가이다."},
             {"role": "user", "content": "결과는 문장을 제외하고 json으로만 해줘. 전체 요소는 price, color, product로 하고 price는 입력받은 가격, color는 입력받은 색상, product는 제품의 정보이고, product의 요소는 brand_name, product_name, all으로 나눠줘. product의 요소 중 all은 전체 이름을 표시해줘. 결과는 문장을 제외하고 json으로만 해줘. "},
@@ -170,51 +184,142 @@
             // {"role": "user", "content": "product의 요소 중 all은 전체 이름을 표시해줘."},
         ]
         
-        // 가격 빈칸 판별
-        // function checkPrice(){
-        //     if ($inputPrice.value == '') {
-        //         userInputData = '가격이 10만원 내외인 ' + $color.value + '계열의 ' + $item.value + '신발을 추천해줘.'
-        //     }
-        //     else {
-        //         userInputData = '가격이 ' + $inputPrice.value + '원 내외인 ' + $color.value + '계열의 ' + $item.value + '신발을 추천해줘.'
-        //     }
-        // }
-        // ==========================================
-        // function checkPrice(){
-        //     if ($inputPrice.value == '') {
-        //         userInputData = '가격이 10만원 내외인 ' + $color.value + '계열의 신발을 추천해줘.'
-        //     }
-        //     else {
-        //         userInputData = '가격이 ' + $inputPrice.value + '원 내외인 ' + $color.value + '계열의 신발을 추천해줘.'
-        //     }
-        // }
-        // ==========================================
-        function checkPrice(){
-            if ($inputPrice.value == '') {
-                userInputData = '가격이 10만원 내외인 '
+        // 가격 판별
+        function check_price_color(){
+            if ($select_price.value == '~10') {
+                if ($select_color.value == 'black'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value
+                }
+                else if ($select_color.value == 'gray'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value
+                }
+                else if ($select_color.value == 'white'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value
+                }
+                else if ($select_color.value == 'red'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value
+                }
+                else if ($select_color.value == 'yellow'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value
+                }
+                else if ($select_color.value == 'brown'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value
+                }
+                else if ($select_color.value == 'green'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value
+                }
+                else if ($select_color.value == 'skyblue'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value
+                }
+                else if ($select_color.value == 'indigo'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value
+                }
+                userInputData = '가격이 10만원 미만인 '
             }
-            else {
-                userInputData = '가격이 ' + $inputPrice.value + '원 내외인 '
+            else if($select_price.value == '10~30'){
+                userInputData = '가격이 10만원~30만원인 '
+            }
+            else if($select_price.value == '30~50'){
+                userInputData = '가격이 30만원~50만원인 '
+            }
+            else if($select_price.value == '50~100'){
+                userInputData = '가격이 50만원~100만원인 '
+            }
+            else if($select_price.value == '100~'){
+                userInputData = '가격이 100만원 이상인 '
             }
         }
 
+        
 
         $button.addEventListener('click', e =>{
             e.preventDefault()
-            checkPrice()
-            $inputPrice.value = ''
+            check_price_color()
+            // $inputPrice.value = ''
 
-            console.log($inputPrice.value)
-            console.log(userInputData + $inputPrice.value)
-            console.log($color.value)
+            // console.log($inputPrice.value)
+            // console.log(userInputData + $inputPrice.value)
+            console.log($select_color.value)
+            console.log($select_price.value)
+            console.log($sel_price_text)
             
-            if ($color.value == 'white') {
-                data.push({
+            // // if ($select_color.value == 'white') {
+            //     data.push({
+            //         "role" : "assistant",
+            //         "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
+            //     })
+            // // }
+            // // else if($select_color.value == 'black'){
+            // //     data.push({
+            // //         "role" : "assistant",
+            // //         "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
+            // //     })
+            // // }
+            switch ($select_color.value) {
+                case 'black':
+                    data.push({
                     "role" : "assistant",
-                    "content" : userInputData + $color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
-                })
-            }
+                    "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
+                    })
+                    break;
+                    
+                case 'gray':
+                    data.push({
+                    "role" : "assistant",
+                    "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
+                    })
+                    break;
 
+                case 'white':
+                    data.push({
+                    "role" : "assistant",
+                    "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
+                    })
+                    break;
+
+                case 'red':
+                    data.push({
+                    "role" : "assistant",
+                    "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
+                    })
+                    break;
+
+                case 'yellow':
+                    data.push({
+                    "role" : "assistant",
+                    "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
+                    })
+                    break;
+
+                case 'brown':
+                    data.push({
+                    "role" : "assistant",
+                    "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
+                    })
+                    break;
+
+                case 'green':
+                    data.push({
+                    "role" : "assistant",
+                    "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
+                    })
+                    break;
+
+                case 'skyblue':
+                    data.push({
+                    "role" : "assistant",
+                    "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
+                    })
+                    break;
+
+                case 'indigo':
+                    data.push({
+                    "role" : "assistant",
+                    "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
+                    })
+                    break;
+
+            }
 
             // data.push({
                 
@@ -244,17 +349,22 @@
                 // console.log(res)
                 // result -> 결과로 받은 json
                 result = JSON.parse(res.choices[0].message.content)
+                
                 console.log(JSON.parse(res.choices[0].message.content))
                 console.log(result.price)
+                console.log(result.product[0].all)
                 
-                const divAnswerContent = document.querySelector('#answerContent')
+                const divanswer_content = document.querySelector('#answer_content')
+                
                 str += `
                     <p class="result_price">${result.price}</p>
                     <p>${result.color}</p>
+                    <img src="./img/shoe/white/${result.product[1].all}.webp" alt="">
+                    
                 `
-                divAnswerContent.innerHTML = str;
+                divanswer_content.innerHTML = str;
 
-                //document.querySelector('#answerContent').innerText = res.choices[0].message.content
+                //document.querySelector('#answer_content').innerText = res.choices[0].message.content
             })
             
         }
