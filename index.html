@@ -49,6 +49,22 @@
             .result_price {
                 font-size: large;
             }
+            
+            .result_container {
+                display: flex;
+            }
+
+            .result_info {
+                display: flex;
+                width: 150px;
+                height: auto;
+                flex-direction: column;
+            }
+            
+            .result_img {
+                width: 150px;
+                height: 150px;
+            }
 
             /* 화면 크기가 줄어들 때 */
             @media(max-width:1100px) {
@@ -68,6 +84,7 @@
                     height: 40px;
                 }
             }
+            
         </style>
 </head>
     <body>
@@ -188,44 +205,151 @@
         function check_price_color(){
             if ($select_price.value == '~10') {
                 if ($select_color.value == 'black'){
-                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. Asics Jog 100 2 Black, 2. Converse Chuck 70 Ox Black, 3. Nike Waffle Trainer 2 Black White 이 있습니다.'
                 }
                 else if ($select_color.value == 'gray'){
-                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
                 }
                 else if ($select_color.value == 'white'){
-                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
                 }
                 else if ($select_color.value == 'red'){
-                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
                 }
                 else if ($select_color.value == 'yellow'){
-                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
                 }
                 else if ($select_color.value == 'brown'){
-                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
                 }
                 else if ($select_color.value == 'green'){
-                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
                 }
                 else if ($select_color.value == 'skyblue'){
-                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
                 }
                 else if ($select_color.value == 'indigo'){
-                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
                 }
-                userInputData = '가격이 10만원 미만인 '
             }
             else if($select_price.value == '10~30'){
+                if ($select_color.value == 'black'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. Adidas Samba OG Black White Gum, 2. Adidas Superstar Core Black White, 3.Nike Air Force 1 \'07 Low Triple Black 이 있습니다.'
+                }
+                else if ($select_color.value == 'gray'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'white'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'red'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'yellow'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'brown'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'green'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'skyblue'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'indigo'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
                 userInputData = '가격이 10만원~30만원인 '
             }
             else if($select_price.value == '30~50'){
+                if ($select_color.value == 'black'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. Jordan 1 x Travis Scott Retro Low OG SP Black Phantom, 2. Maison Mihara Yasuhiro Peterson OG Sole Canvas Low Sneakers Black, 3. Nike x Supreme Air Force 1 Low Black, 4. Salomon XT-6 Gore-Tex Black Ebony 이 있습니다.'
+                }
+                else if ($select_color.value == 'gray'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'white'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'red'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'yellow'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'brown'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'green'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'skyblue'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'indigo'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
                 userInputData = '가격이 30만원~50만원인 '
             }
             else if($select_price.value == '50~100'){
+                if ($select_color.value == 'black'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. Balenciaga Speed Trainer Black White 2021_2022, 2. New Balance 992 Made in USA Black Grey, 3. Nike x Peaceminusone Air Force 1 Low Para-Noise 이 있습니다.'
+                }
+                else if ($select_color.value == 'gray'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'white'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'red'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'yellow'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'brown'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'green'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'skyblue'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'indigo'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
                 userInputData = '가격이 50만원~100만원인 '
             }
             else if($select_price.value == '100~'){
+                if ($select_color.value == 'black'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. Nike x Off-White Air Force 1 Low Black White, 2. Nike x Sacai VaporWaffle Black White, 3. Nike x Tiffany & Co. Air Force 1 Low SP 1837 이 있습니다.'
+                }
+                else if ($select_color.value == 'gray'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'white'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'red'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'yellow'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'brown'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'green'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'skyblue'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
+                else if ($select_color.value == 'indigo'){
+                    userInputData = '가격이 ' + $sel_price_text + '인 ' + $select_color.value + '계열의 신발은 1. , 2. , 3.  이 있습니다.'
+                }
                 userInputData = '가격이 100만원 이상인 '
             }
         }
@@ -243,83 +367,10 @@
             console.log($select_price.value)
             console.log($sel_price_text)
             
-            // // if ($select_color.value == 'white') {
-            //     data.push({
-            //         "role" : "assistant",
-            //         "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
-            //     })
-            // // }
-            // // else if($select_color.value == 'black'){
-            // //     data.push({
-            // //         "role" : "assistant",
-            // //         "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
-            // //     })
-            // // }
-            switch ($select_color.value) {
-                case 'black':
-                    data.push({
-                    "role" : "assistant",
-                    "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
-                    })
-                    break;
-                    
-                case 'gray':
-                    data.push({
-                    "role" : "assistant",
-                    "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
-                    })
-                    break;
-
-                case 'white':
-                    data.push({
-                    "role" : "assistant",
-                    "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
-                    })
-                    break;
-
-                case 'red':
-                    data.push({
-                    "role" : "assistant",
-                    "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
-                    })
-                    break;
-
-                case 'yellow':
-                    data.push({
-                    "role" : "assistant",
-                    "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
-                    })
-                    break;
-
-                case 'brown':
-                    data.push({
-                    "role" : "assistant",
-                    "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
-                    })
-                    break;
-
-                case 'green':
-                    data.push({
-                    "role" : "assistant",
-                    "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
-                    })
-                    break;
-
-                case 'skyblue':
-                    data.push({
-                    "role" : "assistant",
-                    "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
-                    })
-                    break;
-
-                case 'indigo':
-                    data.push({
-                    "role" : "assistant",
-                    "content" : userInputData + $select_color.value + '계열의 신발은 1. Adidas Samba Vegan White Black, 2. Asics Jog 100 S White - 2E Wide, 3. Nike Air Force 1 `07 Low White 이 있습니다.'
-                    })
-                    break;
-
-            }
+            data.push({
+                "role" : "assistant",
+                "content" : userInputData + '결과는 문장을 제외하고 json으로만 해줘.'
+            })
 
             // data.push({
                 
@@ -353,15 +404,34 @@
                 console.log(JSON.parse(res.choices[0].message.content))
                 console.log(result.price)
                 console.log(result.product[0].all)
+                console.log(result.product.length)
                 
                 const divanswer_content = document.querySelector('#answer_content')
                 
                 str += `
-                    <p class="result_price">${result.price}</p>
-                    <p>${result.color}</p>
-                    <img src="./img/shoe/white/${result.product[1].all}.webp" alt="">
+                    <div>
+                        <p class="result_price">${result.price}</p>
+                        <p>${result.color}</p>
+                    </div>
+                    <div class="result_container">
+                    `
+                        for (let i=0; i < result.product.length; i++){
+                            // console.log(result.product[i].all)
+
+                            str += `
+                                <div class="result_info">
+                                    <img class="result_img" src="./img/shoe/${$select_color.value}/${$select_price.value}/${result.product[i].all}.webp" alt="">
+                                    <p>${result.product[i].brand_name}</p>
+                                    <p>${result.product[i].product_name}</p>
+                                </div>
+                            `
                     
-                `
+                    }
+                    `
+                        </div>
+                    `
+                    
+                
                 divanswer_content.innerHTML = str;
 
                 //document.querySelector('#answer_content').innerText = res.choices[0].message.content
