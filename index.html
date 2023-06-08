@@ -357,6 +357,7 @@
         
 
         $button.addEventListener('click', e =>{
+            str = ''
             e.preventDefault()
             check_price_color()
             // $inputPrice.value = ''
@@ -409,15 +410,14 @@
                 const divanswer_content = document.querySelector('#answer_content')
                 
                 str += `
-                    <div>
-                        <p class="result_price">${result.price}</p>
-                        <p>${result.color}</p>
+                    <div class="result_top">
+                        <h1 class="result_price">선택 가격대 : ${result.price}</h1>
+                        <p>선택 색상 : ${result.color}</p>
                     </div>
                     <div class="result_container">
                     `
                         for (let i=0; i < result.product.length; i++){
                             // console.log(result.product[i].all)
-
                             str += `
                                 <div class="result_info">
                                     <img class="result_img" src="./img/shoe/${$select_color.value}/${$select_price.value}/${result.product[i].all}.webp" alt="">
