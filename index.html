@@ -14,20 +14,39 @@
             /* header css */
             .header {
                 height: 75px;
-                background-color: black;
+                background: rgba(30, 90, 253, 0.883);
+                opacity: 0.8;
+                color: white;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 2rem;
+                position: fixed;
+                top: 0;
+                /* width: 100% */
+                left: 0;
+                right: 0;
             }
-            
+            /* //header css */
+
+            /* body css */
+            body {
+                padding-top: 75px;
+                
+            }
             form {
                 width: 100%;
                 margin-top: 5%;
                 padding-left: 25%;
                 padding-right: 25%;
+                
             }
 
             .container {
                 display: flex;
                 flex-direction: column;
                 gap: 3rem;
+                padding-bottom: 100px;
             }
 
             .main {
@@ -51,9 +70,24 @@
                 height: 40px;
                 
             }
+            /* //body css */
 
+            /* footer css */
+            footer {
+                background: rgb(218, 218, 218);
+                width: 100%;
+                position: fixed;
+                height: 100px;
+                bottom: 0;
+                left: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+            /* //footer css */
 
-            /* 여기부터 result css */
+            /* result css */
             .result_price {
                 font-size: large;
             }
@@ -74,6 +108,7 @@
                 width: 150px;
                 height: 150px;
             }
+            /* //result css */
 
             /* 화면 크기가 줄어들 때 */
             @media(max-width:1100px) {
@@ -96,11 +131,16 @@
             
         </style>
 </head>
-    <body>
+    <body id="page_top">
         <!-- header -->
         <div class="header">
-            <div class="logo mb-7 border-b border-slate-300 pb-5">
-                <h1 class="text-2xl text-[#2E6FF2] font-bold">ShoeBOX</h1>
+            <div class="logo">
+                <a class="text-2xl font-bold" href="#page_top">ShoeBOX</a>
+            </div>
+            <div>
+                <ul>
+                    <li>LIKE</li>
+                </ul>
             </div>
         </div>
         <!-- //header -->
@@ -111,7 +151,7 @@
             <!-- main -->
             <div class="container mb-20">
                 <div class="main flex flex-wrap gap-7">
-                    <div class="img flex-1">
+                    <div class="side_img flex-1">
                         <img class="rounded-lg border border-slate-200" src="./src/img/shoes.webp" alt="">
                     </div>
                     <div class="cont flex-1">
@@ -155,11 +195,17 @@
                     </div>
                 </div>
                 <div class="answer">
-                    <p class="text-xl font-bold">추천 결과</p>
                     <div id="answer_content"></div>
                 </div>
             </div>
             <!-- //main -->
+
+            <!-- footer -->
+            <footer>
+                <p class="font-bold">Copyright © For a ShoeBOX(s) 2023</p>
+                <p class="">The first project of Ormi</p>
+            </footer>
+            <!-- //footer -->
         </form>
     <script>
         str = ''
@@ -247,6 +293,7 @@
                 const divanswer_content = document.querySelector('#answer_content')
                 
                 str += `
+                    <p class="text-xl font-bold">추천 결과</p>
                     <div class="result_top">
                         <h1 class="result_price">선택 가격대 : ${result.price}만원</h1>
                         <p>선택 색상 : ${result.color}</p>
@@ -258,8 +305,8 @@
                             str += `
                                 <div class="result_info">
                                     <img class="result_img" src="./src/img/shoe/${$select_color.value}/${$select_price.value}/${result.product[i].all}.webp" alt="">
-                                    <p>${result.product[i].brand_name}</p>
-                                    <p>${result.product[i].product_name}</p>
+                                    <p class="text-xl font-bold">${result.product[i].brand_name}</p>
+                                    <p>${result.product[i].all}</p>
                                 </div>
                             `
                     
