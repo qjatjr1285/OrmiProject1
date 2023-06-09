@@ -10,6 +10,7 @@
         <!-- js -->
         <script src="./src/js/tailwind.config.js"></script> 
         <script src="./src/js/check_price_color.js"></script>
+        <!-- css -->
         <link rel="stylesheet" href="./src/css/footer.css">
         <link rel="stylesheet" href="./src/css/header.css">
         <link rel="stylesheet" href="./src/css/result.css">
@@ -262,16 +263,16 @@
                 
                 console.log(JSON.parse(res.choices[0].message.content))
                 console.log(result.price)
-                console.log(result.product[0].all)
+                // console.log(result.product[0].all)
                 console.log(result.product.length)
                 
                 const divanswer_content = document.querySelector('#answer_content')
                 
                 str += `
-                    <p class="text-2xl text-[#1E5AFD] font-bold">추천 결과</p>
+                    <p class="text-2xl text-[#1E5AFD] font-bold mb-5">추천 결과</p>
                     <div class="result_top">
-                        <h1 class="result_price">선택 가격대 : <b class="font-bold">${result.price}</b>만원</h1>
-                        <p>선택 색상 : <b class="font-bold text-${result.color}-400">${result.color.toUpperCase()}</b></p>
+                        <p class="result_price">선택 가격대 : <b class="font-bold">${result.price}</b>만원</p>
+                        <p>선택 색상 : <b class="font-bold text-${result.color}-500 bg-slate-300">${result.color.toUpperCase()}</b></p>
                     </div>
                     <div class="result_container">
                     `
