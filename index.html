@@ -113,7 +113,7 @@
             </div>
             <div>
                 <ul>
-                    <li><a href="">LIKE</a></li>
+                    <li><a href="./src/pages/like.html">LIKE</a></li>
                     <li><a href="https://github.com/qjatjr1285/OrmiProject1">ABOUT</a></li>
                 </ul>
             </div>
@@ -297,6 +297,37 @@
                 //document.querySelector('#answer_content').innerText = res.choices[0].message.content
             })
             
+        }
+        function isSameAsLocation(uriString) {
+            const uri = new URL(uriString);
+
+            return (
+                uri.origin === window.location.origin &&
+                uri.pathname === window.location.pathname
+            );
+        }
+
+        function pageTransition(nodeList) {
+            nodeList.forEach((node) => {
+                if (!(node instanceof HTMLAnchorElement)) return;
+
+                const { href } = node;
+
+                if (!href || node.target === "_blank" || isSameAsLocation(href)) return;
+
+                node.addEventListener("click", (event) => {
+                    event.preventDefault();
+
+                    document.body.addEventListener(
+                        "transitionend",
+                        () => {
+                            window.location.href = href;
+                        },
+                        { passive: true, once: true }
+                    );
+                    document.body.classList.add("hidden");
+                });
+            });
         }
     </script>
     </body>

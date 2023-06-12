@@ -107,8 +107,9 @@
 </head>
     <body id="page_top">
         <!-- header -->
-        <div id="header"></div>
-        
+        <header>
+
+        </header>
         <!-- //header -->
         <form action="post">
             <!-- <input type="text" autofocus />
@@ -119,32 +120,19 @@
             <!-- //main -->
             
             <!-- footer -->
-            <div id="footer"></div>
+            <footer></footer>
             <!-- //footer -->
         </form>
     <script>
-        $(function(){
-            $("#header").load("./header.html");
-            $("#footer").load("./footer.html");
-        })
+        const header = document.querySelector('header');
+        fetch('./header.html')
+        .then(res => res.text())
+        .then(data => header.innerHTML = data);
 
-        function loadHTML(file)
-        {
-            var rawFile = new XMLHttpRequest();
-            rawFile.open("GET", file, false);
-            rawFile.onreadystatechange = function ()
-            {
-                if(rawFile.readyState === 4)
-                {
-                    if(rawFile.status === 200 || rawFile.status == 0)
-                    {
-                        var allText = rawFile.responseText;
-                        document.write(allText);
-                    }
-                }
-            }
-            rawFile.send(null);
-        }
+        const footer = document.querySelector('footer');
+        fetch('./footer.html')
+        .then(res => res.text())
+        .then(data => footer.innerHTML = data);
 
         function isSameAsLocation(uriString) {
             const uri = new URL(uriString);
