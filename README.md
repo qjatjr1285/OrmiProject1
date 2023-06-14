@@ -4,6 +4,13 @@
 ## 배포 링크
 - https://qjatjr1285.github.io/OrmiProject1/
 
+
+## 개발 환경
+- HTML, JavaScript, CSS
+
+## 개발 기간
+- 2023년 5월 30일 ~ 2023년 6월 14일
+
 ## 프로젝트 구조
 ```shell
 |   index.html
