@@ -5,8 +5,6 @@
 - https://qjatjr1285.github.io/OrmiProject1/
 
 ## 프로젝트 구조
-## 프로젝트 구조
-
 ```shell
 |   index.html
 |
