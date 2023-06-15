@@ -29,7 +29,6 @@ str = ''
             str = ''
             e.preventDefault()
             check_price_color()
-            // $inputPrice.value = ''
 
             // console.log($inputPrice.value)
             // console.log(userInputData + $inputPrice.value)
@@ -92,8 +91,6 @@ str = ''
                     
                 closeLoadingWithMask()
                 divanswer_content.innerHTML = str;
-
-                //document.querySelector('#answer_content').innerText = res.choices[0].message.content
             })
             
         }
