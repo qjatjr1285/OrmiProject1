@@ -1,9 +1,14 @@
 # ShoeBOX
 - ChatGPT를 이용한 신발 추천 사이트  
 
+## 목표
+    1. 이번 프로젝트는 인공지능을 API로 다뤄보는 경험
+    2. HTML, CSS, JS에 익숙해지는 경험
+    3. GitHub에 친숙해지는 경험
+    4. 코드리뷰 경험
+
 ## 배포 링크
 - https://qjatjr1285.github.io/OrmiProject1/
-
 
 ## 개발 환경
 - HTML, JavaScript, CSS
