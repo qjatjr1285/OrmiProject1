@@ -39,6 +39,10 @@ button {
     height: 40px;
     
 }
+
+select {
+    border: 1px solid black;
+}
 /* //body css */
 
 /* 화면 크기가 줄어들 때 */
