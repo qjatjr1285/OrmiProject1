@@ -6,7 +6,7 @@ function LoadingWithMask(gif) {
 
     //화면에 출력할 마스크를 설정해줍니다.
     let mask = `<div id='mask' style='position: fixed; z-index:1; background-color:#000000;
-                left:0; top:0; width: 100%; height: 100%; opacity: 0;'></div>`
+                left:0; top:0; width: 100%; height: 100%; opacity: 0.2;'></div>`
     var loadingImg = '';
 
     loadingImg += `<div id='loadingImg'>
@@ -20,7 +20,7 @@ function LoadingWithMask(gif) {
     $('#mask').css({
             'width' : maskWidth,
             'height': maskHeight,
-            'opacity' : '0'
+            'opacity' : '0.2'
     }); 
 
     //마스크 표시
